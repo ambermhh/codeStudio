@@ -1,94 +1,91 @@
+//Linked list
 class Node {
-    constructor (value) {
-        this.value = value;
-        this.next = null;
-    }
+  constructor(value) {
+    this.value = value;
+    this.next = null;
+  }
 }
 
 class Stack {
-    constructor() {
-        this.top = null;
-        this.bottom = null;
-        this.length = 0;
+  constructor() {
+    this.top = null;
+    this.bottom = null;
+    this.length = 0;
+  }
+
+  peek() {
+    return this.top;
+  }
+  push(value) {
+    const newNode = new Node(value);
+    if (this.length === 0) { //check if this is the first item
+      this.top = newNode;
+      this.bottom = newNode;
+    } else {
+      const holdingPointer = this.top; 
+      this.top = newNode;
+      this.top.next = holdingPointer;
     }
+    this.length++;
+    return this;
+  }
+  pop() {
+   if (!this.top) {
+    return null;
+   }
+   if (this.top === this.bottom) {
+      this.bottom = null;
+   }
+  const holdingPointer = this.top;
+   this.top = this.top.next;
+   this.length--;
+   return holdingPointer;
+  }
+  isEmpty() {}
+}
 
+const myStack = new Stack();
+
+// myStack.push("google");
+// myStack.push("udemy");
+// myStack.push("discord");
+// myStack.peek();
+// myStack.pop();
+// myStack.pop();
+// myStack.pop();
+
+
+
+
+// Arrays
+
+class Node {
+    constructor(value) {
+      this.value = value;
+      this.next = null;
+    }
+  }
+  
+  class Stack {
+    constructor() {
+      this.array = [];
+    }
+  
     peek() {
-
+      return this.array[this.array.length - 1];
     }
     push(value) {
-
+        this.array.push(value);
     }
     pop() {
-
+        this.array.pop();
+        return this;
     }
-    isEmpty() {
+    isEmpty() {}
+  }
 
-    }
-}
+myStack.push("google");
+myStack.push("udemy");
+myStack.push("discord");
 
-function stockPairs(stocksProfit, target) {
-    // Write your code here
-     const seen = new Set(); // Keep track of unique values
-    const pairs = new Set(); // Keep track of unique pairs
-
-    for (const x of stocksProfit) {
-        const complement = target - x;
-
-        // Check if complement is already seen
-        if (seen.has(complement)) {
-            // Add the pair to the set
-            pairs.add([Math.min(x, complement), Math.max(x, complement)].toString());
-        }
-
-        // Add current value to the set
-        seen.add(x);
-    }
-
-    // Return the number of distinct pairs
-    return pairs.size;
-}
-
-Activity.prototype.setAmount = function (amount) {
-    if (amount <= 0) {
-        return false;
-    } else {
-        this.amount = amount;
-        return true;
-    }
-};
-
-Activity.prototype.getAmount = function () {
-    return this.amount;
-};
-
-function Payment(amount, receiver) {
-    this.setAmount(amount);
-    this.setReceiver(receiver);
-}
-
-Payment.prototype = Object.create(Activity.prototype);
-
-Payment.prototype.setReceiver = function (receiver) {
-    this.receiver = receiver;
-    return true;
-};
-
-Payment.prototype.getReceiver = function () {
-    return this.receiver;
-};
-
-function Refund(amount, sender) {
-    this.setAmount(amount);
-    this.setSender(sender);
-}
-
-Refund.prototype = Object.create(Activity.prototype);
-
-Refund.prototype.setSender = function (sender) {
-    this.sender = sender;
-    return true;
-};
-
-Refund.prototype.getSender = function () {
-    return this.sender;
-};
+console.log(myStack);
